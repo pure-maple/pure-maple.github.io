@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1036 366">
+    <defs>
+        <!-- Gradient for timeline points -->
+        <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4481eb"/>
+            <stop offset="100%" style="stop-color:#04befe"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Main Timeline Line -->
+    <line x1="100" y1="183" x2="936" y2="183" stroke="#2196f3" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Timeline Points and Text -->
+    <!-- 2015 Point -->
+    <circle cx="180" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="180" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">2015</text>
+
+    <!-- 2018 Point -->
+    <circle cx="385" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="385" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">2018</text>
+
+    <!-- 2022 Point -->
+    <circle cx="590" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="590" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">2022</text>
+
+    <!-- 2023 Point -->
+    <circle cx="695" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="695" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">2023</text>
+
+    <!-- 2024 Point -->
+    <circle cx="800" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="800" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">2024</text>
+
+    <!-- NOW Point -->
+    <circle cx="915" cy="183" r="14" fill="url(#timelineGradient)"/>
+    <text x="915" y="143" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="bold" fill="#FF6A6A">NOW</text>
+
+    <!-- Institution Names (between points) -->
+    <text x="282.5" y="223" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">Nanchang No.2</text>
+    <text x="282.5" y="253" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">Middle School</text>
+    <text x="487.5" y="233" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">JXNU</text>
+    <text x="642.5" y="233" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">CGNPC</text>
+    <text x="747.5" y="233" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">UNSW</text>
+    <text x="857.5" y="233" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-weight="bold" font-size="24" fill="#2196f3">CMB</text>
+
+    <!-- Decorative Elements -->
+    <circle cx="180" cy="183" r="7" fill="#ffffff"/>
+    <circle cx="385" cy="183" r="7" fill="#ffffff"/>
+    <circle cx="590" cy="183" r="7" fill="#ffffff"/>
+    <circle cx="695" cy="183" r="7" fill="#ffffff"/>
+    <circle cx="800" cy="183" r="7" fill="#ffffff"/>
+    <circle cx="915" cy="183" r="7" fill="#ffffff"/>
+
+    <!-- Connection Lines -->
+    <path d="M 180 171 L 180 143" stroke="#2196f3" stroke-width="2.5"/>
+    <path d="M 385 171 L 385 143" stroke="#2196f3" stroke-width="2.5"/>
+    <path d="M 590 171 L 590 143" stroke="#2196f3" stroke-width="2.5"/>
+    <path d="M 695 171 L 695 143" stroke="#2196f3" stroke-width="2.5"/>
+    <path d="M 800 171 L 800 143" stroke="#2196f3" stroke-width="2.5"/>
+    <path d="M 915 171 L 915 143" stroke="#2196f3" stroke-width="2.5"/>
+
+    <!-- Title -->
+    <text x="518" y="70" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="40" font-weight="bold" fill="#2196f3">TIMELINE</text>
+</svg>
