@@ -1,0 +1,544 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案 | Nebula</title><meta name="keywords" content="Hexo,博客系统,Go,Java,全栈开发,技术重构"><meta name="author" content="Maple,hzlhu@qq.com"><meta name="copyright" content="Maple"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"><meta name="application-name" content="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"><meta property="og:url" content="https://blog.mapleovo.com/posts/b6d20742/index.html"><meta property="og:site_name" content="Nebula"><meta property="og:description" content="问题背景与动机作为一名软件工程出身、AI专业的技术爱好者，我一直将个人博客视为自我表达和技术探索的重要途径。目前我使用的是基于Node.js的Hexo框架，配合安知鱼主题（hexo-theme-anzhiyu）构建的静态博客系统。安知鱼的主题以及洪哥的博客在功能性和美观度上已经相当出色，但在日常使用"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://blog.mapleovo.com/img/bg2.png"><meta property="article:author" content="Maple"><meta property="article:tag" content="Nebula, Maple, Blog, Technology, Life, Learning, Thoughts"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://blog.mapleovo.com/img/bg2.png"><meta name="description" content="问题背景与动机作为一名软件工程出身、AI专业的技术爱好者，我一直将个人博客视为自我表达和技术探索的重要途径。目前我使用的是基于Node.js的Hexo框架，配合安知鱼主题（hexo-theme-anzhiyu）构建的静态博客系统。安知鱼的主题以及洪哥的博客在功能性和美观度上已经相当出色，但在日常使用"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.mapleovo.com/posts/b6d20742/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 科技智能爱好者","🔍 热爱学习与分享","💻 全栈开发工程师","🧠 终身学习践行者","🚀 技术探索不止步","📚 渐进学习实践者","🌱 持续进化成长中","💡 热爱科技与创新"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Maple","link":"链接: ","source":"来源: Nebula","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Nebula',
+  title: '博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案',
+  postAI: '',
+  pageFillDescription: '问题背景与动机, 技术选型分析, 现有技术栈评估, 备选技术方案, 方案1：SpringBoot + Vuex2FReact (Vite) + MySQL, 方案2：Go + Vuex2FReact (Vite) + SQLitex2FMongoDB, 系统架构设计, 核心模块设计, 1. 内容管理系统 (CMS), 2. Hexo集成层, 3. 部署自动化, 4. 内容增强模块, Go vs Java实现比较, 学习与开发路线, 第一阶段：Go语言学习（1个月）, 第二阶段：核心功能实现（2个月）, 第三阶段：前端开发（1个月）, 第四阶段：系统集成与优化（1个月）, 模块化与可扩展性考虑, 预期成果与价值, 结语问题背景与动机作为一名软件工程出身专业的技术爱好者我一直将个人博客视为自我表达和技术探索的重要途径目前我使用的是基于的框架配合安知鱼主题构建的静态博客系统安知鱼的主题以及洪哥的博客在功能性和美观度上已经相当出色但在日常使用过程中我遇到了几个亟待解决的痛点内容管理效率低下编写发布文章需要本地编辑通过操作上传部署流程繁琐缺乏移动端支持无法通过手机随时随地发布内容限制了创作的便捷性构建速度慢在文件较多时构建部署过程耗时较长二次开发复杂的插件生态虽然丰富但定制化开发学习成本较高虽然有类似这样的配套后台管理系统但体验和文档完善度仍有提升空间同时我也了解到等开源建站工具但我更希望通过自己动手改造既满足需求又提升技术能力技术选型分析现有技术栈评估作为一个静态站点生成器的核心工作流程是文件解析器渲染引擎静态文件这种架构的优势在于部署简单安全性高加载速度快但缺点是缺乏动态交互能力每次内容更新都需要重新生成整个站点从技术实现角度的性能瓶颈主要来自单线程处理大量文件操作全量重建模式即使修改一个文件也需要重新生成所有页面缺乏增量编译和热更新机制插件链式执行导致的性能开销备选技术方案基于我的技术背景和学习意愿我考虑了几种可能的技术重构方案方案优势利用我现有的技术栈开发效率高生态成熟安全性和可扩展性强提供极速的开发体验和热更新关系型数据库便于复杂查询和数据管理劣势应用资源占用较高对小型服务器负担重启动速度相对较慢部署复杂度增加方案优势语言性能优异资源占用低编译为单一二进制文件部署简单启动速度快适合按需启动的服务轻量级数据库降低系统复杂度劣势需要学习新语言的框架生态相对年轻系统架构设计经过技术选型分析我倾向于采用的技术栈设计一个兼具静态站点优势和动态内容管理能力的混合架构移动端前端后端服务静态站点生成数据存储核心模块设计内容管理系统文章页面操作编辑器集成媒体资源管理分类标签管理草稿和发布工作流集成层命令执行封装主题配置管理增量生成优化构建性能监控部署自动化集成自动化部署流程部署历史与回滚缓存刷新内容增强模块富文本编辑支持图片处理压缩优化音频视频嵌入处理评论系统集成搜索功能增强实现比较作为一个技术学习项目我特别关注和在这类应用场景的比较特性启动时间秒秒内存占用学习曲线中等已掌握开发效率需要时间适应较高部署复杂度低单二进制文件中包生态成熟度中等但快速成长非常成熟适合场景轻量级服务工具企业级应用对于个人博客系统这种规模的项目的轻量级特性似乎更为适合同时学习也能扩展我的技术视野尤其是在并发处理和系统级编程方面学习与开发路线作为一个人工智能专业毕业的软件工程师我计划将这个项目作为技术深造的契机特别是在语言方面初步规划如下第一阶段语言学习个月基础语法与并发模型框架选择与学习等数据库交互文件操作与系统调用第二阶段核心功能实现个月用户认证系统内容管理编辑器集成命令执行封装第三阶段前端开发个月移动友好界面响应式设计编辑器优化特性第四阶段系统集成与优化个月与前端集成性能优化自动化测试部署自动化模块化与可扩展性考虑为了便于后续迭代和功能扩展我计划将系统设计为高度模块化的结构核心模块内容用户认证配置管理媒体处理模块图片压缩格式转换存储管理渲染引擎模块渲染语法高亮数学公式部署模块操作静态文件生成服务器同步插件系统扩展点设计插件加载机制这种模块化设计不仅便于维护也为日后可能的开源做准备让其他开发者能够基于此框架进行定制开发预期成果与价值这个项目对我个人的价值体现在技术能力提升全栈开发经验语言掌握系统设计能力工作效率改善更便捷的内容创作与管理流程知识积累与分享可将开发过程形成技术博文分享项目管理经验从需求分析到实现部署的完整流程同时如果项目达到一定完善度也可以考虑将其开源为社区提供一个现代化的内容管理解决方案结语作为一名热爱技术的软件工程师我相信技术不仅仅是工作工具更是提升生活品质的手段这个博客系统重构项目既是对现有痛点的解决也是技术学习和自我提升的良好载体随着工作时间的合理安排我会逐步推进这个项目并将进展记录在博客中以此激励自己持续前行',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-27 22:55:08',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Nebula</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/essay/"><span> 余念录</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 随文集</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于我</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Go/" style="font-size: 1.05rem;">Go<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" style="font-size: 1.05rem;">全栈开发<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">博客系统<sup>1</sup></a><a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 1.05rem;">心理<sup>1</sup></a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%87%8D%E6%9E%84/" style="font-size: 1.05rem;">技术重构<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AF%B9%E8%AF%9D/" style="font-size: 1.05rem;">深度对话<sup>1</sup></a><a href="/tags/%E8%87%AA%E6%88%91%E6%8E%A2%E7%B4%A2/" style="font-size: 1.05rem;">自我探索<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">转载</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url">技术</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92/" itemprop="url">项目规划</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Hexo/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Hexo</span></a><a class="article-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>博客系统</span></a><a class="article-meta__tags" href="/tags/Go/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Go</span></a><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>全栈开发</span></a><a class="article-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF%E9%87%8D%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>技术重构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-02-27T14:50:00.000Z" title="发表于 2025-02-27 22:50:00">2025-02-27</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-02-27T14:55:08.886Z" title="更新于 2025-02-27 22:55:08">2025-02-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">1.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为中国"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>中国</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/bg2.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.mapleovo.com/posts/b6d20742/"><header><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url">技术</a><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92/" itemprop="url">项目规划</a><a href="/tags/Hexo/" tabindex="-1" itemprop="url">Hexo</a><a href="/tags/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">博客系统</a><a href="/tags/Go/" tabindex="-1" itemprop="url">Go</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" tabindex="-1" itemprop="url">全栈开发</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%87%8D%E6%9E%84/" tabindex="-1" itemprop="url">技术重构</a><h1 id="CrawlerTitle" itemprop="name headline">博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Maple &amp; Claude</span><time itemprop="dateCreated datePublished" datetime="2025-02-27T14:50:00.000Z" title="发表于 2025-02-27 22:50:00">2025-02-27</time><time itemprop="dateCreated datePublished" datetime="2025-02-27T14:55:08.886Z" title="更新于 2025-02-27 22:55:08">2025-02-27</time></header><h2 id="问题背景与动机"><a href="#问题背景与动机" class="headerlink" title="问题背景与动机"></a>问题背景与动机</h2><p>作为一名软件工程出身、AI专业的技术爱好者，我一直将个人博客视为自我表达和技术探索的重要途径。目前我使用的是基于Node.js的Hexo框架，配合安知鱼主题（<a target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu">hexo-theme-anzhiyu</a>）构建的静态博客系统。安知鱼的主题以及洪哥的博客在功能性和美观度上已经相当出色，但在日常使用过程中，我遇到了几个亟待解决的痛点：</p>
+<ol>
+<li><strong>内容管理效率低下</strong>：编写、发布文章需要本地编辑Markdown，通过Git操作上传，部署流程繁琐</li>
+<li><strong>缺乏移动端支持</strong>：无法通过手机随时随地发布内容，限制了创作的便捷性</li>
+<li><strong>构建速度慢</strong>：Hexo在文件较多时构建、部署过程耗时较长</li>
+<li><strong>二次开发复杂</strong>：Hexo的插件生态虽然丰富，但定制化开发学习成本较高</li>
+</ol>
+<p>虽然有类似<a target="_blank" rel="noopener" href="https://github.com/Qexo/Qexo">Qexo</a>这样的Hexo配套后台管理系统，但体验和文档完善度仍有提升空间。同时，我也了解到<a target="_blank" rel="noopener" href="https://github.com/halo-dev/halo">Halo</a>等开源建站工具，但我更希望通过自己动手改造，既满足需求又提升技术能力。</p>
+<h2 id="技术选型分析"><a href="#技术选型分析" class="headerlink" title="技术选型分析"></a>技术选型分析</h2><h3 id="现有技术栈评估"><a href="#现有技术栈评估" class="headerlink" title="现有技术栈评估"></a>现有技术栈评估</h3><p>作为一个静态站点生成器，Hexo的核心工作流程是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Markdown文件 → 解析器 → 渲染引擎 → 静态HTML/CSS/JS文件</span><br></pre></td></tr></table></figure>
+
+<p>这种架构的优势在于部署简单、安全性高、加载速度快，但缺点是缺乏动态交互能力，每次内容更新都需要重新生成整个站点。</p>
+<p>从技术实现角度，Hexo的性能瓶颈主要来自：</p>
+<ol>
+<li>Node.js单线程处理大量文件IO操作</li>
+<li>全量重建模式（即使修改一个文件也需要重新生成所有页面）</li>
+<li>缺乏增量编译和热更新机制</li>
+<li>插件链式执行导致的性能开销</li>
+</ol>
+<h3 id="备选技术方案"><a href="#备选技术方案" class="headerlink" title="备选技术方案"></a>备选技术方案</h3><p>基于我的技术背景（Java &amp; SpringBoot、Vue &amp; React）和学习意愿（Go），我考虑了几种可能的技术重构方案：</p>
+<h4 id="方案1：SpringBoot-Vue-React-Vite-MySQL"><a href="#方案1：SpringBoot-Vue-React-Vite-MySQL" class="headerlink" title="方案1：SpringBoot + Vue&#x2F;React (Vite) + MySQL"></a>方案1：SpringBoot + Vue&#x2F;React (Vite) + MySQL</h4><p><strong>优势</strong>：</p>
+<ul>
+<li>利用我现有的技术栈，开发效率高</li>
+<li>Spring生态成熟，安全性和可扩展性强</li>
+<li>Vite提供极速的开发体验和热更新</li>
+<li>关系型数据库便于复杂查询和数据管理</li>
+</ul>
+<p><strong>劣势</strong>：</p>
+<ul>
+<li>Java应用资源占用较高，对小型服务器负担重</li>
+<li>启动速度相对较慢</li>
+<li>部署复杂度增加</li>
+</ul>
+<h4 id="方案2：Go-Vue-React-Vite-SQLite-MongoDB"><a href="#方案2：Go-Vue-React-Vite-SQLite-MongoDB" class="headerlink" title="方案2：Go + Vue&#x2F;React (Vite) + SQLite&#x2F;MongoDB"></a>方案2：Go + Vue&#x2F;React (Vite) + SQLite&#x2F;MongoDB</h4><p><strong>优势</strong>：</p>
+<ul>
+<li>Go语言性能优异，资源占用低</li>
+<li>编译为单一二进制文件，部署简单</li>
+<li>启动速度快，适合按需启动的服务</li>
+<li>轻量级数据库降低系统复杂度</li>
+</ul>
+<p><strong>劣势</strong>：</p>
+<ul>
+<li>需要学习新语言（Go）</li>
+<li>Go的Web框架生态相对年轻</li>
+</ul>
+<h2 id="系统架构设计"><a href="#系统架构设计" class="headerlink" title="系统架构设计"></a>系统架构设计</h2><p>经过技术选型分析，我倾向于采用Go + Vue&#x2F;React的技术栈，设计一个兼具静态站点优势和动态内容管理能力的混合架构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────┐    ┌──────────────┐    ┌────────────────┐</span><br><span class="line">│ 移动端/PC前端UI │ ─&gt; │ Go后端API服务 │ ─&gt; │ Hexo静态站点生成 │</span><br><span class="line">└─────────────────┘    └──────────────┘    └────────────────┘</span><br><span class="line">                            │</span><br><span class="line">                            v</span><br><span class="line">                       ┌─────────┐</span><br><span class="line">                       │ 数据存储 │</span><br><span class="line">                       └─────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心模块设计"><a href="#核心模块设计" class="headerlink" title="核心模块设计"></a>核心模块设计</h3><h4 id="1-内容管理系统-CMS"><a href="#1-内容管理系统-CMS" class="headerlink" title="1. 内容管理系统 (CMS)"></a>1. 内容管理系统 (CMS)</h4><ul>
+<li>文章、页面CRUD操作</li>
+<li>Markdown编辑器集成</li>
+<li>媒体资源管理</li>
+<li>分类、标签管理</li>
+<li>草稿和发布工作流</li>
+</ul>
+<h4 id="2-Hexo集成层"><a href="#2-Hexo集成层" class="headerlink" title="2. Hexo集成层"></a>2. Hexo集成层</h4><ul>
+<li>Hexo命令执行封装</li>
+<li>主题配置管理</li>
+<li>增量生成优化</li>
+<li>构建性能监控</li>
+</ul>
+<h4 id="3-部署自动化"><a href="#3-部署自动化" class="headerlink" title="3. 部署自动化"></a>3. 部署自动化</h4><ul>
+<li>Git集成</li>
+<li>自动化部署流程</li>
+<li>部署历史与回滚</li>
+<li>CDN缓存刷新</li>
+</ul>
+<h4 id="4-内容增强模块"><a href="#4-内容增强模块" class="headerlink" title="4. 内容增强模块"></a>4. 内容增强模块</h4><ul>
+<li>富文本编辑支持</li>
+<li>图片处理（压缩、优化）</li>
+<li>音频&#x2F;视频嵌入处理</li>
+<li>评论系统集成</li>
+<li>搜索功能增强</li>
+</ul>
+<h2 id="Go-vs-Java实现比较"><a href="#Go-vs-Java实现比较" class="headerlink" title="Go vs Java实现比较"></a>Go vs Java实现比较</h2><p>作为一个技术学习项目，我特别关注Go和Java在这类应用场景的比较：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Go</th>
+<th>Java (SpringBoot)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动时间</td>
+<td>&lt;1秒</td>
+<td>5-30秒</td>
+</tr>
+<tr>
+<td>内存占用</td>
+<td>~20-50MB</td>
+<td>~200-500MB</td>
+</tr>
+<tr>
+<td>学习曲线</td>
+<td>中等</td>
+<td>已掌握</td>
+</tr>
+<tr>
+<td>开发效率</td>
+<td>需要时间适应</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>部署复杂度</td>
+<td>低（单二进制文件）</td>
+<td>中（JAR包+JVM）</td>
+</tr>
+<tr>
+<td>生态成熟度</td>
+<td>中等但快速成长</td>
+<td>非常成熟</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>轻量级服务、CLI工具</td>
+<td>企业级应用</td>
+</tr>
+</tbody></table>
+<p>对于个人博客系统这种规模的项目，Go的轻量级特性似乎更为适合。同时，学习Go也能扩展我的技术视野，尤其是在并发处理和系统级编程方面。</p>
+<h2 id="学习与开发路线"><a href="#学习与开发路线" class="headerlink" title="学习与开发路线"></a>学习与开发路线</h2><p>作为一个人工智能专业毕业的软件工程师，我计划将这个项目作为技术深造的契机，特别是在Go语言方面。初步规划如下：</p>
+<h3 id="第一阶段：Go语言学习（1个月）"><a href="#第一阶段：Go语言学习（1个月）" class="headerlink" title="第一阶段：Go语言学习（1个月）"></a>第一阶段：Go语言学习（1个月）</h3><ul>
+<li>基础语法与并发模型</li>
+<li>Web框架选择与学习（Gin、Echo等）</li>
+<li>数据库交互</li>
+<li>文件操作与系统调用</li>
+</ul>
+<h3 id="第二阶段：核心功能实现（2个月）"><a href="#第二阶段：核心功能实现（2个月）" class="headerlink" title="第二阶段：核心功能实现（2个月）"></a>第二阶段：核心功能实现（2个月）</h3><ul>
+<li>用户认证系统</li>
+<li>内容管理API</li>
+<li>Markdown编辑器集成</li>
+<li>Hexo命令执行封装</li>
+</ul>
+<h3 id="第三阶段：前端开发（1个月）"><a href="#第三阶段：前端开发（1个月）" class="headerlink" title="第三阶段：前端开发（1个月）"></a>第三阶段：前端开发（1个月）</h3><ul>
+<li>Vue&#x2F;React移动友好界面</li>
+<li>响应式设计</li>
+<li>编辑器优化</li>
+<li>PWA特性</li>
+</ul>
+<h3 id="第四阶段：系统集成与优化（1个月）"><a href="#第四阶段：系统集成与优化（1个月）" class="headerlink" title="第四阶段：系统集成与优化（1个月）"></a>第四阶段：系统集成与优化（1个月）</h3><ul>
+<li>API与前端集成</li>
+<li>性能优化</li>
+<li>自动化测试</li>
+<li>部署自动化</li>
+</ul>
+<h2 id="模块化与可扩展性考虑"><a href="#模块化与可扩展性考虑" class="headerlink" title="模块化与可扩展性考虑"></a>模块化与可扩展性考虑</h2><p>为了便于后续迭代和功能扩展，我计划将系统设计为高度模块化的结构：</p>
+<ol>
+<li><strong>核心API模块</strong>：内容CRUD、用户认证、配置管理</li>
+<li><strong>媒体处理模块</strong>：图片压缩、格式转换、存储管理</li>
+<li><strong>渲染引擎模块</strong>：Markdown渲染、语法高亮、数学公式</li>
+<li><strong>部署模块</strong>：Git操作、静态文件生成、服务器同步</li>
+<li><strong>插件系统</strong>：扩展点设计、插件加载机制</li>
+</ol>
+<p>这种模块化设计不仅便于维护，也为日后可能的开源做准备，让其他开发者能够基于此框架进行定制开发。</p>
+<h2 id="预期成果与价值"><a href="#预期成果与价值" class="headerlink" title="预期成果与价值"></a>预期成果与价值</h2><p>这个项目对我个人的价值体现在：</p>
+<ol>
+<li><strong>技术能力提升</strong>：全栈开发经验、Go语言掌握、系统设计能力</li>
+<li><strong>工作效率改善</strong>：更便捷的内容创作与管理流程</li>
+<li><strong>知识积累与分享</strong>：可将开发过程形成技术博文分享</li>
+<li><strong>项目管理经验</strong>：从需求分析到实现部署的完整流程</li>
+</ol>
+<p>同时，如果项目达到一定完善度，也可以考虑将其开源，为Hexo社区提供一个现代化的内容管理解决方案。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>作为一名热爱技术的软件工程师，我相信技术不仅仅是工作工具，更是提升生活品质的手段。这个博客系统重构项目既是对现有痛点的解决，也是技术学习和自我提升的良好载体。随着工作时间的合理安排，我会逐步推进这个项目，并将进展记录在博客中，以此激励自己持续前行。</p>
+<p>“The best way to predict the future is to invent it.” —— Alan Kay</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">Maple &amp; Claude</div><div class="post-copyright__author_desc">人生浪漫，多多浪漫</div></div><div class="post-copyright__post__info"><a class="post-copyright__reprint" title="该文章为转载文章，注意版权协议" href="https://blog.mapleovo.com/posts/b6d20742/">转载</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.mapleovo.com/posts/b6d20742/')">博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.mapleovo.com/posts/b6d20742/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案&amp;url=https://blog.mapleovo.com/posts/b6d20742/&amp;pic=/img/bg2.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.mapleovo.com" target="_blank">Nebula</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Hexo/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Hexo<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>博客系统<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Go/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Go<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Java<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>全栈开发<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%8A%80%E6%9C%AF%E9%87%8D%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>技术重构<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/img/bg2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/d05e0771/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/bg1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">与深渊对望时，我打捞起自己的倒影 —— 关于ENFP的爱的辩证法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/39708ccd71a95.gif" alt="status"/></div></div><div class="author-info__description"><div style="display: flex"><div style="font-size: 0.9em; text-align: center; margin: auto;">谁终将声震人间，必长久深自缄默；<br>谁终将点燃闪电，必长久如云漂泊；<br>属于我的时代尚未到来，<br>终有星辰死后方生辉煌。</div></div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Maple</h1><div class="author-info__desc">人生浪漫，多多浪漫</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/pure-maple" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/71551662" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF%E4%B8%8E%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">问题背景与动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">技术选型分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E6%9C%89%E6%8A%80%E6%9C%AF%E6%A0%88%E8%AF%84%E4%BC%B0"><span class="toc-number">2.1.</span> <span class="toc-text">现有技术栈评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E9%80%89%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88"><span class="toc-number">2.2.</span> <span class="toc-text">备选技术方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%A1%881%EF%BC%9ASpringBoot-Vue-React-Vite-MySQL"><span class="toc-number">2.2.1.</span> <span class="toc-text">方案1：SpringBoot + Vue&#x2F;React (Vite) + MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%A1%882%EF%BC%9AGo-Vue-React-Vite-SQLite-MongoDB"><span class="toc-number">2.2.2.</span> <span class="toc-text">方案2：Go + Vue&#x2F;React (Vite) + SQLite&#x2F;MongoDB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">系统架构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.1.</span> <span class="toc-text">核心模块设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-CMS"><span class="toc-number">3.1.1.</span> <span class="toc-text">1. 内容管理系统 (CMS)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Hexo%E9%9B%86%E6%88%90%E5%B1%82"><span class="toc-number">3.1.2.</span> <span class="toc-text">2. Hexo集成层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-number">3.1.3.</span> <span class="toc-text">3. 部署自动化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%86%85%E5%AE%B9%E5%A2%9E%E5%BC%BA%E6%A8%A1%E5%9D%97"><span class="toc-number">3.1.4.</span> <span class="toc-text">4. 内容增强模块</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go-vs-Java%E5%AE%9E%E7%8E%B0%E6%AF%94%E8%BE%83"><span class="toc-number">4.</span> <span class="toc-text">Go vs Java实现比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF"><span class="toc-number">5.</span> <span class="toc-text">学习与开发路线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9AGo%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%EF%BC%881%E4%B8%AA%E6%9C%88%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">第一阶段：Go语言学习（1个月）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%EF%BC%882%E4%B8%AA%E6%9C%88%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">第二阶段：核心功能实现（2个月）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%EF%BC%881%E4%B8%AA%E6%9C%88%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">第三阶段：前端开发（1个月）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90%E4%B8%8E%E4%BC%98%E5%8C%96%EF%BC%881%E4%B8%AA%E6%9C%88%EF%BC%89"><span class="toc-number">5.4.</span> <span class="toc-text">第四阶段：系统集成与优化（1个月）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E8%80%83%E8%99%91"><span class="toc-number">6.</span> <span class="toc-text">模块化与可扩展性考虑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F%E6%88%90%E6%9E%9C%E4%B8%8E%E4%BB%B7%E5%80%BC"><span class="toc-number">7.</span> <span class="toc-text">预期成果与价值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">8.</span> <span class="toc-text">结语</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/b6d20742/" title="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/bg2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案"/></a><div class="content"><a class="title" href="/posts/b6d20742/" title="博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案">博客系统重构与技术升级规划：从Hexo静态到动态全栈解决方案</a><time datetime="2025-02-27T14:50:00.000Z" title="发表于 2025-02-27 22:50:00">2025-02-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d05e0771/" title="与深渊对望时，我打捞起自己的倒影 —— 关于ENFP的爱的辩证法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/bg1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="与深渊对望时，我打捞起自己的倒影 —— 关于ENFP的爱的辩证法"/></a><div class="content"><a class="title" href="/posts/d05e0771/" title="与深渊对望时，我打捞起自己的倒影 —— 关于ENFP的爱的辩证法">与深渊对望时，我打捞起自己的倒影 —— 关于ENFP的爱的辩证法</a><time datetime="2025-02-27T14:00:00.000Z" title="发表于 2025-02-27 22:00:00">2025-02-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/944687f6/" title="待办"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/bg2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="待办"/></a><div class="content"><a class="title" href="/posts/944687f6/" title="待办">待办</a><time datetime="2024-12-28T16:00:00.000Z" title="发表于 2024-12-29 00:00:00">2024-12-29</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:hzlhu@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/pure-maple" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.3.0" title="博客框架为Hexo_v7.3.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v7.3.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="Maple" target="_blank">Maple</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://mapleovo.com/" title="Nebula">Nebula</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://mapleovo.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/essay/"><span> 余念录</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 随文集</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Go/" style="font-size: 0.88rem;">Go<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" style="font-size: 0.88rem;">全栈开发<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">博客系统<sup>1</sup></a><a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 0.88rem;">心理<sup>1</sup></a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%87%8D%E6%9E%84/" style="font-size: 0.88rem;">技术重构<sup>1</sup></a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AF%B9%E8%AF%9D/" style="font-size: 0.88rem;">深度对话<sup>1</sup></a><a href="/tags/%E8%87%AA%E6%88%91%E6%8E%A2%E7%B4%A2/" style="font-size: 0.88rem;">自我探索<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("01/30/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Maple 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="https://cdnjs.cloudflare.com/ajax/libs/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
